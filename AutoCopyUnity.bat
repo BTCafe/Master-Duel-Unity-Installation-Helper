@@ -10,8 +10,6 @@ call :printLineBreak
 
 call :getModInfo
 call :getModRegistry
-call :checkFolderStructure "Modded"
-call :checkFolderStructure "Original"
 
 if exist "%installPath%" (
 	echo(
@@ -152,29 +150,6 @@ robocopy .\masterduel_Data %unityPath% data.unity3d /s /e /is /NFL /NDL /NJH /nc
 set modInstalled=true
 echo Mod installed
 Goto end
-
-:checkFolderStructure
-set /a statusStructure=1
-dir /a-d "%1\*" >nul 2>nul && (
-		rem echo File outside of folder, proceed to make folder for each
- 	set /a statusStructure=0) || (
- 		rem echo No file found, proceed as normal
- 	)
-
-if %statusStructure% EQU 0 (
-	for %%G in (".\%1\*") do (
-			set charactersFolder=%%~nxG
-			call :repairFolder "%charactersFolder%" %1  
-	)
-)
-rem echo %statusStructure%
-EXIT /B
-
-:repairFolder
-rem Make a new folder based on the first two character of the file and then move those file inside it 
-MD ".\%2\%charactersFolder:~0,2%" >nul
-move ".\%2\%charactersFolder%" ".\%2\%charactersFolder:~0,2%" >nul
-EXIT /B
 
 :getModInfo
 if exist ModStatus.ini ( 
