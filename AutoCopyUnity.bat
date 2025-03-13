@@ -98,6 +98,9 @@ echo 4) Reset Install Folder
 echo(
 echo Mod will be installed in: %completePath%
 call :printLineBreak
+echo If the game doesn't start, you can manually download the original Unity file from this link
+echo https://drive.google.com/drive/folders/1WAk4M1Iz8Br0DX2I9bglHmrXqRwIJvXj?usp=drive_link
+call :printLineBreak
 CHOICE /M Select /C 1234 
 echo(
 call :printLineBreak
